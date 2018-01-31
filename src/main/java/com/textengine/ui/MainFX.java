@@ -4,7 +4,6 @@ package com.textengine.ui;
  * Created by Funnyseeker on 21.05.2017.
  */
 
-import com.textengine.core.utils.Senticnet4RdfParser;
 import com.textengine.ui.model.TextEngineInfo;
 import com.textengine.ui.model.TextEnginesListWrapper;
 import com.textengine.ui.view.AddTextController;
@@ -54,7 +53,7 @@ public class MainFX extends Application {
         try {
             //Загружаем основной макет из fxml файла.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(ClassLoader.getSystemClassLoader().getResource("com/textengine/ui/view/TextEngineUI.fxml"));
+            loader.setLocation(ClassLoader.getSystemResource("TextEngineUI.fxml"));
             textEngineLayout = loader.load();
 
             //Отображаем сцену, содержащую основной макет.
@@ -75,7 +74,7 @@ public class MainFX extends Application {
             // Загружаем fxml-файл и создаём новую сцену
             // для всплывающего диалогового окна.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(ClassLoader.getSystemClassLoader().getResource("com/textengine/ui/view/AddText.fxml"));
+            loader.setLocation(ClassLoader.getSystemResource("AddText.fxml"));
             AnchorPane page = loader.load();
 
             // Создаём диалоговое окно Stage.
