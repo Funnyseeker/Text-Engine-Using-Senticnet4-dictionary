@@ -1,9 +1,10 @@
 package fun.textengine.ui;
 
 import fun.textengine.core.ConceptObject;
+import fun.textengine.core.SQLDictionaryMatcher;
 import fun.textengine.core.TextObject;
 import fun.textengine.core.utils.SQLDictionary;
-import fun.textengine.core.utils.TextEngineParser;
+import fun.textengine.core.TextEngineSolver;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -56,7 +57,7 @@ public class Main {
                     System.out.println(line);
                     text += line;
                 }
-                TextObject textObject = new TextEngineParser().parseText(text.trim());
+                TextObject textObject = new TextEngineSolver(new SQLDictionaryMatcher()).parseText(text.trim());
                 System.out.println("Sentiment: " + textObject.getPolarityObject().getIntensity());
                 System.out.println("Sentiment polarity: " + textObject.getPolarityObject().getPolarity().name());
                 String neg = "{0} group : {1} \n {2}";

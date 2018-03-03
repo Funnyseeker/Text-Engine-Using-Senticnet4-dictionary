@@ -1,7 +1,7 @@
 package fun.textengine.ui.view;
 
+import fun.textengine.core.TextEngineSolver;
 import fun.textengine.core.TextObject;
-import fun.textengine.core.utils.TextEngineParser;
 import fun.textengine.ui.model.TextEngineInfo;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -12,12 +12,17 @@ import javafx.stage.Stage;
  * Created by Funnyseeker on 22.05.2017.
  */
 public class AddTextController {
+    private static TextEngineSolver TEXT_ENGINE_SOLVER;
     private Stage dialogStage;
     private TextEngineInfo engineInfo;
     private boolean okClicked = false;
 
     @FXML
     private TextArea textArea;
+
+    public static void setTextEngineSolver(TextEngineSolver textEngineSolver) {
+        TEXT_ENGINE_SOLVER = textEngineSolver;
+    }
 
     /**
      * Инициализирует класс-контроллер. Этот метод вызывается автоматически
@@ -55,7 +60,7 @@ public class AddTextController {
     @FXML
     private void handleOk() {
         if (isInputValid()) {
-            TextObject textObject = new TextEngineParser().parseText(textArea.getText());
+            TextObject textObject = TEXT_ENGINE_SOLVER.parseText(textArea.getText());
             engineInfo.setText(textObject.getText());
             engineInfo.setIntensity(textObject.getPolarityObject().getIntensity());
             engineInfo.setPolarity(textObject.getPolarityObject().getPolarity().name());

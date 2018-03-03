@@ -54,12 +54,6 @@ public class Senticnet4ObjectsFactoryImpl implements Senticnet4ObjectsFactory {
         NodeList childs = node.getChildNodes();
         List<String> semantics = new ArrayList<>();
         List<String> moodtags = new ArrayList<>();
-//        for (int i = 0; i < childs.getLength(); i++) {
-//            Node currNode = childs.item(i);
-//            if(currNode.getNodeName().equals("semantics")){
-//
-//            }
-//        }
         return new ConceptObjectImpl(concept, semantics, moodtags, senticsObject, polarityObject);
     }
 

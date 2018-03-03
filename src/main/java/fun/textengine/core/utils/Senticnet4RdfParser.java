@@ -20,7 +20,7 @@ import java.net.URL;
  */
 public class Senticnet4RdfParser {
 
-    public MapDictionary parse(URL url) throws Exception {
+    public static MapDictionary parse(URL url) throws Exception {
         System.out.println("Starting dictionary loading...");
         DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 
@@ -32,7 +32,7 @@ public class Senticnet4RdfParser {
         return MapDictionary.getInstance();
     }
 
-    private void createMapDictionary(Node root) throws Exception {
+    private static void createMapDictionary(Node root) throws Exception {
         NodeList childs = root.getChildNodes();
         for (int i = 0; i < childs.getLength(); i++) {
             Node currNode = childs.item(i);
@@ -46,7 +46,7 @@ public class Senticnet4RdfParser {
         }
     }
 
-    private NodeList getChildsNodes(Node root, String tagName) {
+    private static NodeList getChildsNodes(Node root, String tagName) {
         NodeList childs = root.getChildNodes();
         for (int i = 0; i < childs.getLength(); i++) {
             if (childs.item(i).getNodeName().equals(tagName)) {
