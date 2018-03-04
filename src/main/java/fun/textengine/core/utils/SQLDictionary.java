@@ -8,9 +8,15 @@ import fun.textengine.core.impl.ConceptObjectImpl;
 import fun.textengine.core.impl.PolarityObjectImpl;
 import fun.textengine.core.impl.SenticsObjectImpl;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.MessageFormat;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,10 +27,10 @@ public class SQLDictionary {
     private final String conseptKeyTemplate = "http://sentic.net/api/en/concept/";
     private final String selectComplexPattern = "select * from [Dictionary] where ([Concept] LIKE ''% {0}'' OR ''{0} %'') AND COMPLEX = 1";
     private final String selectSimplePattern = "select * from [Dictionary] where ([Concept] LIKE ''{0}'') AND COMPLEX = 0";
-    private Connection conn = null;
     private final String clazzName = "org.sqlite.JDBC";
     private final String url = "jdbc:sqlite:database.s3db";
-    public Map<ConceptObject, Integer> matched = new HashMap<>();
+    private Connection conn = null;
+
 
     private SQLDictionary() {
         try {
@@ -40,42 +46,43 @@ public class SQLDictionary {
         return instance;
     }
 
-    public Map<ConceptObject, Integer> getConceptObjects(String text) {
-
-        matched = new HashMap<>();
-
-        String[] words = text.split("[,;:.!?\\s]+");
-        for (String word : words) {
-            try {
-                Statement statement = conn.createStatement();
-                ResultSet resultSet = statement.executeQuery(MessageFormat.format(selectComplexPattern, word));
-                while (resultSet.next()) {
-                    text = check(resultSet, text, matched);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+    public List<ConceptObject> getComplexConceptObjects(String word) {
+        List<ConceptObject> conceptObjectList = new ArrayList<>();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery(MessageFormat.format(selectComplexPattern, word));
+            while (resultSet.next()) {
+                ConceptObject conceptObject = conceptObjectFromResultSet(resultSet);
+                conceptObjectList.add(conceptObject);
             }
-        }
-        for (String word : words) {
-            try {
-                Statement statement = conn.createStatement();
-                ResultSet resultSet = statement.executeQuery(MessageFormat.format(selectSimplePattern, word));
-                while (resultSet.next()) {
-                    text = check(resultSet, text, matched);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
-        return matched;
+        return conceptObjectList;
+    }
+
+    public List<ConceptObject> getConceptObjects(String word) {
+        List<ConceptObject> conceptObjectList = new ArrayList<>();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery(MessageFormat.format(selectSimplePattern, word));
+            while (resultSet.next()) {
+                ConceptObject conceptObject = conceptObjectFromResultSet(resultSet);
+                conceptObjectList.add(conceptObject);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return conceptObjectList;
     }
 
     public void createSQLDict() {
         String sql = "insert into [Dictionary] (Concept,PolarityIntensity,SenticsPleasantness,SenticsAttention," +
                 "SenticsSensitivity, SenticsAptitude, Complex) values (?,?,?,?,?,?,?)";
         int counter = 0;
-        for (Map.Entry<String, ConceptObject> entry : MapDictionary.getInstance().getComplexConeptsDictionary().entrySet()) {
+        for (Map.Entry<String, ConceptObject> entry : MapDictionary.getInstance().getComplexConeptsDictionary()
+                .entrySet()) {
             try {
                 PreparedStatement statement = conn.prepareStatement(sql);
                 statement.setString(1, entry.getValue().getText());
@@ -92,7 +99,8 @@ public class SQLDictionary {
                 e.printStackTrace();
             }
         }
-        for (Map.Entry<String, ConceptObject> entry : MapDictionary.getInstance().getSimpleConceptsDictionary().entrySet()) {
+        for (Map.Entry<String, ConceptObject> entry : MapDictionary.getInstance().getSimpleConceptsDictionary()
+                .entrySet()) {
             try {
                 PreparedStatement statement = conn.prepareStatement(sql);
                 statement.setString(1, entry.getValue().getText());
@@ -111,17 +119,12 @@ public class SQLDictionary {
         }
     }
 
-    private String check(ResultSet resultSet, String text, Map<ConceptObject, Integer> matched) throws SQLException {
-        String result = resultSet.getString("Concept");
-        int counter = 0;
-        boolean isContains = false;
-        while (text.contains(" " + result.toLowerCase() + " ")) {
-            text = text.replaceFirst(" " + result.toLowerCase() + " ", " | ");
-            counter++;
-            isContains = true;
-        }
-        if (isContains) {
-            SenticsObject senticsObject = new SenticsObjectImpl(
+
+    private ConceptObject conceptObjectFromResultSet(ResultSet resultSet) {
+        try {
+            SenticsObject senticsObject = null;
+            String result = resultSet.getString("Concept");
+            senticsObject = new SenticsObjectImpl(
                     resultSet.getFloat("SenticsPleasantness"),
                     resultSet.getFloat("SenticsAttention"),
                     resultSet.getFloat("SenticsSensitivity"),
@@ -135,8 +138,10 @@ public class SQLDictionary {
                     null,
                     senticsObject,
                     polarityObject);
-            matched.put(conceptObject, counter);
+            return conceptObject;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return text;
+        return null;
     }
 }

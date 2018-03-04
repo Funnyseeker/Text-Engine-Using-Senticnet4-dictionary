@@ -12,7 +12,7 @@ public class MapDictionaryMatcher implements ConceptMatcher {
         Map<ConceptObject, Integer> matched = new HashMap<>();
         for (Map.Entry<String, ConceptObject> entry : MapDictionary.getInstance().getComplexConeptsDictionary()
                 .entrySet()) {
-            if (text.contains(" " + entry.getValue().getText().toLowerCase() + " ")) {
+            while (text.contains(" " + entry.getValue().getText().toLowerCase() + " ")) {
                 text = text.replaceFirst(" " + entry.getValue().getText().toLowerCase() + " ", " ");
                 if (!matched.containsKey(entry.getValue())) {
                     matched.put(entry.getValue(), 1);
@@ -24,7 +24,7 @@ public class MapDictionaryMatcher implements ConceptMatcher {
         }
         for (Map.Entry<String, ConceptObject> entry : MapDictionary.getInstance().getSimpleConceptsDictionary()
                 .entrySet()) {
-            if (text.contains(" " + entry.getValue().getText().toLowerCase() + " ")) {
+            while (text.contains(" " + entry.getValue().getText().toLowerCase() + " ")) {
                 text = text.replaceFirst(" " + entry.getValue().getText().toLowerCase() + " ", " ");
                 if (!matched.containsKey(entry.getValue())) {
                     matched.put(entry.getValue(), 1);

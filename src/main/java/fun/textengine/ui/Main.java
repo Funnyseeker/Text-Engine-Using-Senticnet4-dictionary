@@ -65,9 +65,9 @@ public class Main {
                         textObject.getNegativeGroup().split(";").length - 1, textObject.getNegativeGroup()));
                 System.out.println(MessageFormat.format(neg, "Positive",
                         textObject.getPositiveGroup().split(";").length - 1, textObject.getPositiveGroup()));
-                for (Map.Entry<ConceptObject, Integer> entry : SQLDictionary.getInstance().matched.entrySet()) {
-                    System.out.println(entry.getKey().getText() + " : " + entry.getValue());
-                }
+//                for (Map.Entry<ConceptObject, Integer> entry : SQLDictionary.getInstance().matched.entrySet()) {
+//                    System.out.println(entry.getKey().getText() + " : " + entry.getValue());
+//                }
                 System.out.println("-----------------------------------");
                 System.gc();
             }
