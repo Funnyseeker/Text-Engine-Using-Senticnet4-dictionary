@@ -1,6 +1,6 @@
 package fun.textengine.core;
 
-import fun.textengine.core.utils.MapDictionary;
+import fun.textengine.core.dictionaries.MapDictionary;
 
 import java.util.HashMap;
 import java.util.Map;

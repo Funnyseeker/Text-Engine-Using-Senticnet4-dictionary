@@ -1,9 +1,7 @@
 package fun.textengine.ui;
 
-import fun.textengine.core.ConceptObject;
 import fun.textengine.core.SQLDictionaryMatcher;
 import fun.textengine.core.TextObject;
-import fun.textengine.core.utils.SQLDictionary;
 import fun.textengine.core.TextEngineSolver;
 
 import java.io.BufferedReader;
@@ -14,7 +12,6 @@ import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -24,7 +21,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         try {
 //            URL documentUrl = ClassLoader.getSystemClassLoader().getResource("senticnet4/senticnet4.rdf.xml");
-//            Senticnet4RdfParser parser = new Senticnet4RdfParser();
+//            Senticnet4RdfImporter parser = new Senticnet4RdfImporter();
 //            parser.parse(documentUrl);
 //            SQLDictionary.getInstance().createSQLDict();
             List<String[]> texts = new ArrayList<>();

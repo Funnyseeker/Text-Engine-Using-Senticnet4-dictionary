@@ -1,14 +1,8 @@
 package fun.textengine.core;
 
-import fun.textengine.core.ConceptObject;
-import fun.textengine.core.Polarity;
-import fun.textengine.core.TextObject;
 import fun.textengine.core.impl.PolarityObjectImpl;
 import fun.textengine.core.impl.TextObjectImpl;
-import fun.textengine.core.utils.MapDictionary;
-import fun.textengine.core.utils.SQLDictionary;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**

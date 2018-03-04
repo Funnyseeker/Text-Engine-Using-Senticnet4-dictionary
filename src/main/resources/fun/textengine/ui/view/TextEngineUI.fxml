@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<SplitPane dividerPositions="0.5501893939393939" focusTraversable="true" prefHeight="687.0" prefWidth="1058.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="fun.textengine.ui.view.TextEngineOverviewController">
+<SplitPane dividerPositions="0.5501893939393939" focusTraversable="true" prefHeight="687.0" prefWidth="1058.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fun.textengine.ui.view.TextEngineOverviewController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="685.0" prefWidth="431.0">
       <children>
         <TableView fx:id="engineTable" disable="false" focusTraversable="true" prefHeight="686.0" prefWidth="433.0" tableMenuButtonVisible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <columns>
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="35.0" text="ID" fx:id="idColumn" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="359.0" text="Source text" fx:id="textColumn" />
-            <TableColumn maxWidth="5000.0" minWidth="0.0" prefWidth="69.0" text="Sentiment" fx:id="intensityColumn" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Sentiment polarity" fx:id="polarityColumn" />
+            <TableColumn fx:id="idColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="35.0" text="ID" />
+            <TableColumn fx:id="textColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="359.0" text="Source text" />
+            <TableColumn fx:id="intensityColumn" maxWidth="5000.0" minWidth="0.0" prefWidth="69.0" text="Sentiment" />
+            <TableColumn fx:id="polarityColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Sentiment polarity" />
           </columns>
         </TableView>
       </children>
@@ -73,6 +79,7 @@
             <Button maxHeight="21.0" maxWidth="55.0" minHeight="16.0" mnemonicParsing="false" onAction="#handleDeleteText" prefHeight="21.0" prefWidth="55.0" text="Delete" />
           </children>
         </HBox>
+            <Button layoutX="20.0" layoutY="650.0" maxHeight="21.0" minHeight="16.0" mnemonicParsing="false" text="Manual analysis" />
       </children>
     </AnchorPane>
   </items>

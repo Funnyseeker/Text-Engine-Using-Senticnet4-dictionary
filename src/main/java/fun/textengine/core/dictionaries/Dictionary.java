@@ -1,4 +1,4 @@
-package fun.textengine.core.utils;
+package fun.textengine.core.dictionaries;
 
 /**
  * Created by Funnyseeker on 24.05.2017.

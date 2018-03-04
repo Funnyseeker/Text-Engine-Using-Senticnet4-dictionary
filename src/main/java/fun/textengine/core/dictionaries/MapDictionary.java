@@ -1,4 +1,4 @@
-package fun.textengine.core.utils;
+package fun.textengine.core.dictionaries;
 
 import fun.textengine.core.ConceptObject;
 
@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Created by somz on 19.05.2017.
  */
-public class MapDictionary {
+public class MapDictionary implements Dictionary {
     private static MapDictionary instance = new MapDictionary();
     private static final String conseptKeyTemplate = "http://sentic.net/api/en/concept/";
     private Map<String, ConceptObject> complexConceptsDictionary = new HashMap<>();

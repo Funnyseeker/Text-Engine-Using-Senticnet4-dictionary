@@ -4,7 +4,7 @@ import fun.textengine.core.ConceptMatcher;
 import fun.textengine.core.MapDictionaryMatcher;
 import fun.textengine.core.SQLDictionaryMatcher;
 import fun.textengine.core.TextEngineSolver;
-import fun.textengine.core.utils.Senticnet4RdfParser;
+import fun.textengine.core.importers.Senticnet4RdfImporter;
 import fun.textengine.ui.MainFX;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -53,7 +53,7 @@ public class StartController {
         if (modeChoiceBox.getSelectionModel().selectedIndexProperty().get() == 0) {
             URL documentUrl = ClassLoader.getSystemClassLoader().getResource("senticnet4/senticnet4.rdf.xml");
             try {
-                Senticnet4RdfParser.parse(documentUrl);
+                Senticnet4RdfImporter.parse(documentUrl);
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.initOwner(mainApp.getPrimaryStage());

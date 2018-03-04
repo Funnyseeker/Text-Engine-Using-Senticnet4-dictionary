@@ -1,4 +1,4 @@
-package fun.textengine.core.utils;
+package fun.textengine.core.dictionaries;
 
 import fun.textengine.core.ConceptObject;
 import fun.textengine.core.Polarity;
@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * Created by Funnyseeker on 24.05.2017.
  */
-public class SQLDictionary {
+public class SQLDictionary implements Dictionary {
     private static SQLDictionary instance = new SQLDictionary();
     private final String conseptKeyTemplate = "http://sentic.net/api/en/concept/";
     private final String selectComplexPattern = "select * from [Dictionary] where ([Concept] LIKE ''% {0}'' OR ''{0} %'') AND COMPLEX = 1";

@@ -1,9 +1,9 @@
-package fun.textengine.core.utils;
+package fun.textengine.core.importers;
 
 import fun.textengine.core.ConceptObject;
 import fun.textengine.core.PolarityObject;
 import fun.textengine.core.SenticsObject;
-import fun.textengine.core.utils.impl.Senticnet4ObjectsFactoryImpl;
+import fun.textengine.core.dictionaries.MapDictionary;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -18,7 +18,7 @@ import java.net.URL;
 /**
  * Created by Funnyseeker on 19.05.2017.
  */
-public class Senticnet4RdfParser {
+public class Senticnet4RdfImporter {
 
     public static MapDictionary parse(URL url) throws Exception {
         System.out.println("Starting dictionary loading...");
@@ -37,7 +37,7 @@ public class Senticnet4RdfParser {
         for (int i = 0; i < childs.getLength(); i++) {
             Node currNode = childs.item(i);
             if (currNode.getNodeName().equals("rdf:Description")) {
-                Senticnet4ObjectsFactory factory = Senticnet4ObjectsFactoryImpl.getInstance();
+                RdfObjectsFactory factory = RdfObjectsFactoryImpl.getInstance();
                 SenticsObject senticsObject = factory.createNewSenticsObject(getChildsNodes(currNode, "sentics"));
                 PolarityObject polarityObject = factory.createNewPolarityObject(getChildsNodes(currNode, "polarity"));
                 ConceptObject conceptObject = factory.createNewConceptObject(currNode, senticsObject, polarityObject);

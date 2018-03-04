@@ -1,7 +1,7 @@
 package fun.textengine.core;
 
 
-import fun.textengine.core.utils.SQLDictionary;
+import fun.textengine.core.dictionaries.SQLDictionary;
 
 import java.util.HashMap;
 import java.util.List;

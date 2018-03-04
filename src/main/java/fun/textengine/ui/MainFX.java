@@ -43,7 +43,7 @@ public class MainFX extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 //        java.net.URL documentUrl = ClassLoader.getSystemClassLoader().getResource("senticnet4/senticnet4.rdf.xml");
-//        Senticnet4RdfParser parser = new Senticnet4RdfParser();
+//        Senticnet4RdfImporter parser = new Senticnet4RdfImporter();
 //        parser.parse(documentUrl);
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Text Sentic Engine (using Senticnet4 dictionary)");

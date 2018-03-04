@@ -1,4 +1,4 @@
-package fun.textengine.core.utils.impl;
+package fun.textengine.core.importers;
 
 import fun.textengine.core.ConceptObject;
 import fun.textengine.core.Polarity;
@@ -7,7 +7,6 @@ import fun.textengine.core.SenticsObject;
 import fun.textengine.core.impl.ConceptObjectImpl;
 import fun.textengine.core.impl.PolarityObjectImpl;
 import fun.textengine.core.impl.SenticsObjectImpl;
-import fun.textengine.core.utils.Senticnet4ObjectsFactory;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -17,13 +16,13 @@ import java.util.List;
 /**
  * Created by Funnyseeker on 19.05.2017.
  */
-public class Senticnet4ObjectsFactoryImpl implements Senticnet4ObjectsFactory {
-    private static Senticnet4ObjectsFactory instance = new Senticnet4ObjectsFactoryImpl();
+public class RdfObjectsFactoryImpl implements RdfObjectsFactory {
+    private static RdfObjectsFactory instance = new RdfObjectsFactoryImpl();
 
-    private Senticnet4ObjectsFactoryImpl() {
+    private RdfObjectsFactoryImpl() {
     }
 
-    public static Senticnet4ObjectsFactory getInstance() {
+    public static RdfObjectsFactory getInstance() {
         return instance;
     }
 
