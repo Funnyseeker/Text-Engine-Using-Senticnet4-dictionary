@@ -1,4 +1,4 @@
-package fun.textengine.core.dictionaries;
+package fun.textengine.dictionaries;
 
 import fun.textengine.core.ConceptObject;
 

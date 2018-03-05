@@ -1,11 +1,18 @@
 package fun.textengine.ui.model;
 
-import javafx.beans.property.*;
+import fun.textengine.core.ConceptObject;
+import javafx.beans.property.FloatProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
+import java.util.List;
 
 /**
  * Created by Funnyseeker on 21.05.2017.
  */
-
 public class TextEngineInfo {
     private final IntegerProperty id;
     private final StringProperty text;
@@ -14,7 +21,9 @@ public class TextEngineInfo {
     private final StringProperty negativeGroup;
     private final StringProperty positiveGroup;
 
-    public TextEngineInfo(Integer id, String text, Float intensity, String polarity,
+    public TextEngineInfo(Integer id, String text,
+                          List<ConceptObject> property,
+                          Float intensity, String polarity,
                           String negativeGroup, String positiveGroup) {
         this.id = new SimpleIntegerProperty(id);
         this.text = new SimpleStringProperty(text);
@@ -25,15 +34,15 @@ public class TextEngineInfo {
     }
 
     public TextEngineInfo() {
-        this(-1, null, 0f, null, null, null);
-    }
-
-    public void setId(Integer id) {
-        this.id.set(id);
+        this(-1, null, null, 0f, null, null, null);
     }
 
     public Integer getId() {
         return id.get();
+    }
+
+    public void setId(Integer id) {
+        this.id.set(id);
     }
 
     public IntegerProperty idProperty() {
@@ -76,24 +85,24 @@ public class TextEngineInfo {
         return polarity;
     }
 
-    public void setNegativeGroup(String negativeGroup) {
-        this.negativeGroup.set(negativeGroup);
-    }
-
     public String getNegativeGroup() {
         return negativeGroup.get();
+    }
+
+    public void setNegativeGroup(String negativeGroup) {
+        this.negativeGroup.set(negativeGroup);
     }
 
     public StringProperty negativeGroupProperty() {
         return negativeGroup;
     }
 
-    public void setPositiveGroup(String positiveGroup) {
-        this.positiveGroup.set(positiveGroup);
-    }
-
     public String getPositiveGroup() {
         return positiveGroup.get();
+    }
+
+    public void setPositiveGroup(String positiveGroup) {
+        this.positiveGroup.set(positiveGroup);
     }
 
     public StringProperty positiveGroupProperty() {

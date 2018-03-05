@@ -1,9 +1,14 @@
 package fun.textengine.ui.view;
 
+import com.sun.deploy.util.StringUtils;
 import fun.textengine.ui.MainFX;
 import fun.textengine.ui.model.TextEngineInfo;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 
 /**
  * Created by Funnyseeker on 21.05.2017.
@@ -77,16 +82,16 @@ public class TextEngineOverviewController {
     }
 
     @FXML
-    private void showTextInfo(TextEngineInfo engineView) {
-        if (engineView != null) {
-            textArea.setText(engineView.getText());
-            intensityLabel.setText(String.valueOf(engineView.getIntensity()));
-            polarityLabel.setText(engineView.getPolarity());
-            positiveGroup.setText(engineView.getPositiveGroup());
-            negativeGroup.setText(engineView.getNegativeGroup());
-            int negCount = engineView.getNegativeGroup().split(";").length - 1;
+    private void showTextInfo(TextEngineInfo engineInfo) {
+        if (engineInfo != null) {
+            textArea.setText(engineInfo.getText());
+            intensityLabel.setText(String.valueOf(engineInfo.getIntensity()));
+            polarityLabel.setText(engineInfo.getPolarity());
+            positiveGroup.setText(engineInfo.getPositiveGroup());
+            negativeGroup.setText(engineInfo.getNegativeGroup());
+            int negCount = engineInfo.getNegativeGroup().split(";").length - 1;
             negativeCounter.setText(String.valueOf(negCount));
-            int posCount = engineView.getPositiveGroup().split(";").length - 1;
+            int posCount = engineInfo.getPositiveGroup().split(";").length - 1;
             positiveCounter.setText(String.valueOf(posCount));
         } else {
             textArea.setText("");
@@ -124,5 +129,10 @@ public class TextEngineOverviewController {
 
             alert.showAndWait();
         }
+    }
+
+    @FXML
+    private void handleManualAnalisis() {
+
     }
 }

@@ -1,9 +1,9 @@
-package fun.textengine.core.importers;
+package fun.textengine.importers;
 
 import fun.textengine.core.ConceptObject;
 import fun.textengine.core.PolarityObject;
 import fun.textengine.core.SenticsObject;
-import fun.textengine.core.dictionaries.MapDictionary;
+import fun.textengine.dictionaries.MapDictionary;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;

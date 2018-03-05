@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class TextEngineSolver {
 
-    ConceptMatcher matcher;
+    private ConceptMatcher matcher;
 
     public TextEngineSolver(ConceptMatcher matcher) {
         this.matcher = matcher;
@@ -40,5 +40,13 @@ public class TextEngineSolver {
         }
         Polarity polarity = Polarity.getFromIntesity(sum);
         return new TextObjectImpl(originalText, new PolarityObjectImpl(polarity, sum), positiveGroup, negativeGroup);
+    }
+
+    public ConceptMatcher getMatcher() {
+        return matcher;
+    }
+
+    public void setMatcher(ConceptMatcher matcher) {
+        this.matcher = matcher;
     }
 }

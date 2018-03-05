@@ -1,4 +1,4 @@
-package fun.textengine.core.dictionaries;
+package fun.textengine.dictionaries;
 
 import fun.textengine.core.ConceptObject;
 import fun.textengine.core.Polarity;
@@ -25,8 +25,8 @@ import java.util.Map;
 public class SQLDictionary implements Dictionary {
     private static SQLDictionary instance = new SQLDictionary();
     private final String conseptKeyTemplate = "http://sentic.net/api/en/concept/";
-    private final String selectComplexPattern = "select * from [Dictionary] where ([Concept] LIKE ''% {0}'' OR ''{0} %'') AND COMPLEX = 1";
-    private final String selectSimplePattern = "select * from [Dictionary] where ([Concept] LIKE ''{0}'') AND COMPLEX = 0";
+    private final String selectComplexPattern = "select * from [Dictionary] where COMPLEX = 1 AND ([Concept] LIKE ''%{0}%'')";
+    private final String selectSimplePattern = "select * from [Dictionary] where COMPLEX = 0 AND ([Concept] LIKE ''{0}'')";
     private final String clazzName = "org.sqlite.JDBC";
     private final String url = "jdbc:sqlite:database.s3db";
     private Connection conn = null;
@@ -118,7 +118,6 @@ public class SQLDictionary implements Dictionary {
             }
         }
     }
-
 
     private ConceptObject conceptObjectFromResultSet(ResultSet resultSet) {
         try {

@@ -4,7 +4,7 @@ import fun.textengine.core.ConceptMatcher;
 import fun.textengine.core.MapDictionaryMatcher;
 import fun.textengine.core.SQLDictionaryMatcher;
 import fun.textengine.core.TextEngineSolver;
-import fun.textengine.core.importers.Senticnet4RdfImporter;
+import fun.textengine.importers.Senticnet4RdfImporter;
 import fun.textengine.ui.MainFX;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

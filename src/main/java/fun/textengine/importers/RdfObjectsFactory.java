@@ -1,4 +1,4 @@
-package fun.textengine.core.importers;
+package fun.textengine.importers;
 
 import fun.textengine.core.ConceptObjectFactory;
 import fun.textengine.core.PolarityObjectFactory;

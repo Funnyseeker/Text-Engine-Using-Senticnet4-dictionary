@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1"
-            xmlns="http://javafx.com/javafx/2.2" fx:controller="fun.textengine.ui.view.AddTextController">
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fun.textengine.ui.view.AddTextController">
     <children>
-        <TextArea fx:id="textArea" layoutX="14.0" layoutY="22.0" prefHeight="344.0" prefWidth="572.0" wrapText="true"/>
+        <TextArea fx:id="textArea" layoutX="14.0" layoutY="22.0" prefHeight="344.0" prefWidth="572.0" wrapText="true" />
         <HBox id="HBox" alignment="CENTER" layoutX="469.0" layoutY="370.0" spacing="5.0">
             <children>
-                <Button mnemonicParsing="false" onAction="#handleOk" prefWidth="56.0" text="Ok"/>
-                <Button mnemonicParsing="false" onAction="#handleCancel" prefWidth="56.0" text="Cancel"/>
+                <Button fx:id="okButton" mnemonicParsing="false" onAction="#handleOk" prefWidth="56.0" text="Ok" />
+                <Button mnemonicParsing="false" onAction="#handleCancel" prefWidth="56.0" text="Cancel" />
             </children>
         </HBox>
+      <ProgressBar fx:id="progressBar" layoutX="14.0" layoutY="374.0" prefHeight="18.0" prefWidth="446.0" progress="0.0" />
     </children>
 </AnchorPane>
