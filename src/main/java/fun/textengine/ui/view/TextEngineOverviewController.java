@@ -1,13 +1,23 @@
 package fun.textengine.ui.view;
 
+import fun.textengine.core.SQLDictionaryMatcher;
+import fun.textengine.dictionaries.Dictionary;
+import fun.textengine.dictionaries.MapDictionary;
+import fun.textengine.dictionaries.SQLDictionary;
+import fun.textengine.importers.Senticnet4RdfImporter;
+import fun.textengine.importers.Senticnet4TxtImporter;
 import fun.textengine.ui.MainFX;
 import fun.textengine.ui.model.TextEngineInfo;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.ToggleGroup;
+
+import java.net.URL;
 
 /**
  * Created by Funnyseeker on 21.05.2017.
@@ -23,6 +33,12 @@ public class TextEngineOverviewController {
     private TableColumn<TextEngineInfo, Float> intensityColumn;
     @FXML
     private TableColumn<TextEngineInfo, String> polarityColumn;
+    @FXML
+    private RadioMenuItem radioMenuItemEn;
+    @FXML
+    private RadioMenuItem radioMenuItemDe;
+    @FXML
+    private ToggleGroup languageGroup;
 
     @FXML
     private TextArea textArea;
@@ -131,7 +147,23 @@ public class TextEngineOverviewController {
     }
 
     @FXML
-    private void handleManualAnalisis() {
-
+    private void handleChangeLanguage() throws Exception {
+        Dictionary.Dictionaries dict;
+        if (radioMenuItemEn.isSelected()) {
+            dict = Dictionary.Dictionaries.EN;
+        } else {
+            dict = Dictionary.Dictionaries.DE;
+        }
+        if (AddTextController.getTextEngineSolver().getMatcher() instanceof SQLDictionaryMatcher) {
+            SQLDictionary.getInstance().setCurrDictTableCode(dict.getCode());
+        } else {
+            MapDictionary.getInstance().clear();
+            URL documentUrl = ClassLoader.getSystemClassLoader().getResource(dict.getFilePath());
+            if (dict == Dictionary.Dictionaries.EN) {
+                Senticnet4RdfImporter.parse(documentUrl);
+            } else {
+                Senticnet4TxtImporter.parse(documentUrl);
+            }
+        }
     }
 }

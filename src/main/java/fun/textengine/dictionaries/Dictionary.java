@@ -9,12 +9,12 @@ public interface Dictionary {
         DE(1, "senticnet4/data_de.txt", "De_Dictionary");
 
         private int code;
-        private String filepath;
+        private String filePath;
         private String tableName;
 
-        Dictionaries(int code, String filepath, String tableName) {
+        Dictionaries(int code, String filePath, String tableName) {
             this.code = code;
-            this.filepath = filepath;
+            this.filePath = filePath;
             this.tableName = tableName;
         }
 
@@ -31,8 +31,8 @@ public interface Dictionary {
             return code;
         }
 
-        public String getFilepath() {
-            return filepath;
+        public String getFilePath() {
+            return filePath;
         }
 
         public String getTableName() {

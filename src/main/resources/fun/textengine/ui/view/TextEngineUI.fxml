@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<SplitPane dividerPositions="0.5501893939393939" focusTraversable="true" prefHeight="687.0" prefWidth="1058.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fun.textengine.ui.view.TextEngineOverviewController">
+
+<SplitPane dividerPositions="0.5501893939393939" focusTraversable="true" prefHeight="716.0" prefWidth="1058.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fun.textengine.ui.view.TextEngineOverviewController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="685.0" prefWidth="431.0">
       <children>
@@ -21,6 +25,18 @@
             <TableColumn fx:id="intensityColumn" maxWidth="5000.0" minWidth="0.0" prefWidth="69.0" text="Sentiment" />
             <TableColumn fx:id="polarityColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Sentiment polarity" />
           </columns>
+               <contextMenu>
+                  <ContextMenu>
+                     <items>
+                        <RadioMenuItem fx:id="radioMenuItemEn" mnemonicParsing="false" onAction="#handleChangeLanguage" selected="true" text="EN">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="languageGroup" />
+                           </toggleGroup>
+                        </RadioMenuItem>
+                        <RadioMenuItem fx:id="radioMenuItemDe" mnemonicParsing="false" onAction="#handleChangeLanguage" text="DE" toggleGroup="$languageGroup" />
+                     </items>
+                  </ContextMenu>
+               </contextMenu>
         </TableView>
       </children>
     </AnchorPane>
@@ -78,7 +94,6 @@
             <Button maxHeight="26.0" maxWidth="55.0" minHeight="16.0" mnemonicParsing="false" onAction="#handleDeleteText" prefHeight="26.0" prefWidth="55.0" text="Delete" />
           </children>
         </HBox>
-            <Button layoutX="20.0" layoutY="643.0" maxHeight="28.0" minHeight="16.0" mnemonicParsing="false" onAction="#handleManualAnalisis" prefHeight="28.0" prefWidth="100.0" text="Manual analysis" />
             <TextArea fx:id="textArea" prefHeight="310.0" prefWidth="472.0" />
       </children>
     </AnchorPane>

@@ -29,6 +29,10 @@ public class AddTextController {
     @FXML
     private Button okButton;
 
+    public static TextEngineSolver getTextEngineSolver() {
+        return TEXT_ENGINE_SOLVER;
+    }
+
     public static void setTextEngineSolver(TextEngineSolver textEngineSolver) {
         TEXT_ENGINE_SOLVER = textEngineSolver;
     }

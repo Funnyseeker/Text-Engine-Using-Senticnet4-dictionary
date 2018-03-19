@@ -65,4 +65,9 @@ public class MapDictionary implements Dictionary {
     public Map<String, ConceptObject> getSimpleConceptsDictionary() {
         return simpleConceptsDictionary;
     }
+
+    public void clear() {
+        complexConceptsDictionary.clear();
+        simpleConceptsDictionary.clear();
+    }
 }
