@@ -25,12 +25,14 @@ import java.util.Map;
 public class SQLDictionary implements Dictionary {
     private static SQLDictionary instance = new SQLDictionary();
     private final String conseptKeyTemplate = "http://sentic.net/api/en/concept/";
-    private final String selectComplexPattern = "select * from [Dictionary] where COMPLEX = 1 AND ([Concept] LIKE ''%{0}%'')";
-    private final String selectSimplePattern = "select * from [Dictionary] where COMPLEX = 0 AND ([Concept] LIKE ''{0}'')";
     private final String clazzName = "org.sqlite.JDBC";
     private final String url = "jdbc:sqlite:database.s3db";
+    private int currDictTableCode = 0;
+    private final String selectSimplePattern = "select * from ["
+            + Dictionaries.getByCode(currDictTableCode).getTableName() + "] where COMPLEX = 0 AND ([Concept] LIKE ''{0}'')";
+    private final String selectComplexPattern = "select * from ["
+            + Dictionaries.getByCode(currDictTableCode).getTableName() + "] where COMPLEX = 1 AND ([Concept] LIKE ''%{0}%'')";
     private Connection conn = null;
-
 
     private SQLDictionary() {
         try {
@@ -78,8 +80,9 @@ public class SQLDictionary implements Dictionary {
     }
 
     public void createSQLDict() {
-        String sql = "insert into [Dictionary] (Concept,PolarityIntensity,SenticsPleasantness,SenticsAttention," +
-                "SenticsSensitivity, SenticsAptitude, Complex) values (?,?,?,?,?,?,?)";
+        String sql = "insert into [" + Dictionaries.getByCode(currDictTableCode).getTableName() + "] " +
+                "(Concept,PolarityIntensity,SenticsPleasantness,SenticsAttention,SenticsSensitivity,SenticsAptitude," +
+                "Complex) values (?,?,?,?,?,?,?)";
         int counter = 0;
         for (Map.Entry<String, ConceptObject> entry : MapDictionary.getInstance().getComplexConeptsDictionary()
                 .entrySet()) {
@@ -142,5 +145,9 @@ public class SQLDictionary implements Dictionary {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void setCurrDictTableCode(int currDictTableCode) {
+        this.currDictTableCode = currDictTableCode;
     }
 }

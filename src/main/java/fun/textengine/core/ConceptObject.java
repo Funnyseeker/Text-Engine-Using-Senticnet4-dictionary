@@ -23,5 +23,5 @@ public interface ConceptObject {
 
     PolarityObject getConceptPolarity();
 
-    ConceptType gerConceptType();
+    ConceptType getConceptType();
 }

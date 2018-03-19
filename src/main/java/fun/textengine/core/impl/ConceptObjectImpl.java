@@ -65,7 +65,7 @@ public class ConceptObjectImpl implements ConceptObject {
     }
 
     @Override
-    public ConceptType gerConceptType() {
+    public ConceptType getConceptType() {
         return conceptType;
     }
 

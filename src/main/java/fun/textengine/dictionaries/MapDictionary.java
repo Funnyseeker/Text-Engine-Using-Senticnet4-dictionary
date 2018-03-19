@@ -9,8 +9,8 @@ import java.util.Map;
  * Created by somz on 19.05.2017.
  */
 public class MapDictionary implements Dictionary {
-    private static MapDictionary instance = new MapDictionary();
     private static final String conseptKeyTemplate = "http://sentic.net/api/en/concept/";
+    private static MapDictionary instance = new MapDictionary();
     private Map<String, ConceptObject> complexConceptsDictionary = new HashMap<>();
     private Map<String, ConceptObject> simpleConceptsDictionary = new HashMap<>();
 
@@ -36,10 +36,10 @@ public class MapDictionary implements Dictionary {
 
     public void addConceptObject(ConceptObject conceptObject) throws Exception {
         if (containsKey(conceptObject.getConcept())) {
-            throw new Exception(conceptObject.getConcept() + " - this key already presented in complexConceptsDictionary");
+            throw new Exception(
+                    conceptObject.getConcept() + " - this key already presented in ConceptsDictionary");
         }
-        if (conceptObject.gerConceptType().equals(ConceptObject.ConceptType.COMPLEX)) {
-
+        if (conceptObject.getConceptType().equals(ConceptObject.ConceptType.COMPLEX)) {
             complexConceptsDictionary.put(conceptObject.getConcept(), conceptObject);
             return;
         }

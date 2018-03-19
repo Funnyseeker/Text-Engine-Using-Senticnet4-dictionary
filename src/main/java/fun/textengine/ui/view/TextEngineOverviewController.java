@@ -1,6 +1,5 @@
 package fun.textengine.ui.view;
 
-import com.sun.deploy.util.StringUtils;
 import fun.textengine.ui.MainFX;
 import fun.textengine.ui.model.TextEngineInfo;
 import javafx.fxml.FXML;

@@ -4,6 +4,8 @@ import fun.textengine.core.ConceptObject;
 import fun.textengine.core.PolarityObject;
 import fun.textengine.core.SenticsObject;
 import fun.textengine.dictionaries.MapDictionary;
+import fun.textengine.dictionaries.SQLDictionary;
+import fun.textengine.importers.impl.RdfObjectsFactoryImpl;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -19,6 +21,13 @@ import java.net.URL;
  * Created by Funnyseeker on 19.05.2017.
  */
 public class Senticnet4RdfImporter {
+
+    public static void main(String[] args) throws Exception {
+        URL documentUrl = ClassLoader.getSystemClassLoader().getResource("senticnet4/senticnet4.rdf.xml");
+        Senticnet4RdfImporter parser = new Senticnet4RdfImporter();
+        parser.parse(documentUrl);
+        SQLDictionary.getInstance().createSQLDict();
+    }
 
     public static MapDictionary parse(URL url) throws Exception {
         System.out.println("Starting dictionary loading...");

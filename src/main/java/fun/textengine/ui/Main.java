@@ -3,11 +3,13 @@ package fun.textengine.ui;
 import fun.textengine.core.SQLDictionaryMatcher;
 import fun.textengine.core.TextObject;
 import fun.textengine.core.TextEngineSolver;
+import fun.textengine.importers.Senticnet4RdfImporter;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 import java.util.ArrayList;
