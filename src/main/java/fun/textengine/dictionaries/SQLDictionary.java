@@ -28,10 +28,8 @@ public class SQLDictionary implements Dictionary {
     private final String clazzName = "org.sqlite.JDBC";
     private final String url = "jdbc:sqlite:database.s3db";
     private int currDictTableCode = 0;
-    private final String selectSimplePattern = "select * from ["
-            + Dictionaries.getByCode(currDictTableCode).getTableName() + "] where COMPLEX = 0 AND ([Concept] LIKE ''{0}'')";
-    private final String selectComplexPattern = "select * from ["
-            + Dictionaries.getByCode(currDictTableCode).getTableName() + "] where COMPLEX = 1 AND ([Concept] LIKE ''%{0}%'')";
+    private final String selectSimplePattern = "select * from [{0}] where COMPLEX = 0 AND ([Concept] = ''{1}'')";
+    private final String selectComplexPattern = "select * from [{0}] where COMPLEX = 1 AND ([Concept] LIKE ''%{1}%'')";
     private Connection conn = null;
 
     private SQLDictionary() {
@@ -52,7 +50,7 @@ public class SQLDictionary implements Dictionary {
         List<ConceptObject> conceptObjectList = new ArrayList<>();
         try {
             Statement statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery(MessageFormat.format(selectComplexPattern, word));
+            ResultSet resultSet = statement.executeQuery(MessageFormat.format(selectComplexPattern,Dictionaries.getByCode(currDictTableCode).getTableName(), word));
             while (resultSet.next()) {
                 ConceptObject conceptObject = conceptObjectFromResultSet(resultSet);
                 conceptObjectList.add(conceptObject);
@@ -68,7 +66,7 @@ public class SQLDictionary implements Dictionary {
         List<ConceptObject> conceptObjectList = new ArrayList<>();
         try {
             Statement statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery(MessageFormat.format(selectSimplePattern, word));
+            ResultSet resultSet = statement.executeQuery(MessageFormat.format(selectSimplePattern, Dictionaries.getByCode(currDictTableCode).getTableName(), word));
             while (resultSet.next()) {
                 ConceptObject conceptObject = conceptObjectFromResultSet(resultSet);
                 conceptObjectList.add(conceptObject);
@@ -88,7 +86,7 @@ public class SQLDictionary implements Dictionary {
                 .entrySet()) {
             try {
                 PreparedStatement statement = conn.prepareStatement(sql);
-                statement.setString(1, entry.getValue().getText());
+                statement.setString(1, entry.getValue().getText().trim());
                 statement.setFloat(2, entry.getValue().getConceptPolarity().getIntensity());
                 statement.setFloat(3, entry.getValue().getSentics().getPleasantness());
                 statement.setFloat(4, entry.getValue().getSentics().getAttention());
@@ -97,7 +95,9 @@ public class SQLDictionary implements Dictionary {
                 statement.setBoolean(7, true);
                 statement.execute();
                 counter++;
-                System.out.println(counter);
+                if (counter%1000 == 0) {
+                    System.out.println(counter);
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -106,7 +106,7 @@ public class SQLDictionary implements Dictionary {
                 .entrySet()) {
             try {
                 PreparedStatement statement = conn.prepareStatement(sql);
-                statement.setString(1, entry.getValue().getText());
+                statement.setString(1, entry.getValue().getText().trim());
                 statement.setFloat(2, entry.getValue().getConceptPolarity().getIntensity());
                 statement.setFloat(3, entry.getValue().getSentics().getPleasantness());
                 statement.setFloat(4, entry.getValue().getSentics().getAttention());
@@ -115,7 +115,9 @@ public class SQLDictionary implements Dictionary {
                 statement.setBoolean(7, false);
                 statement.execute();
                 counter++;
-                System.out.println(counter);
+                if (counter%1000 == 0) {
+                    System.out.println(counter);
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }

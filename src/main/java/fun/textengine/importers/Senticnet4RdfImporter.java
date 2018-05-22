@@ -22,13 +22,6 @@ import java.net.URL;
  */
 public class Senticnet4RdfImporter {
 
-    public static void main(String[] args) throws Exception {
-        URL documentUrl = ClassLoader.getSystemClassLoader().getResource("senticnet4/senticnet4.rdf.xml");
-        Senticnet4RdfImporter parser = new Senticnet4RdfImporter();
-        parser.parse(documentUrl);
-        SQLDictionary.getInstance().createSQLDict();
-    }
-
     public static MapDictionary parse(URL url) throws Exception {
         System.out.println("Starting dictionary loading...");
         DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -88,5 +81,12 @@ public class Senticnet4RdfImporter {
                 System.out.println(method.getName() + ": " + method.invoke(object));
             }
         }
+    }
+
+    public static void main(String[] args) throws Exception {
+        URL documentUrl = ClassLoader.getSystemClassLoader().getResource("senticnet4/senticnet4.rdf.xml");
+        Senticnet4RdfImporter parser = new Senticnet4RdfImporter();
+        parser.parse(documentUrl);
+        SQLDictionary.getInstance().createSQLDict();
     }
 }

@@ -35,12 +35,6 @@ public class Senticnet4TxtImporter {
         return MapDictionary.getInstance();
     }
 
-    public static void main(String[] args) throws Exception {
-        URL documentUrl = ClassLoader.getSystemClassLoader().getResource("senticnet4/data_de.txt");
-        parse(documentUrl);
-        SQLDictionary.getInstance().setCurrDictTableCode(1);
-        SQLDictionary.getInstance().createSQLDict();
-    }
 
     private static ConceptObject getConcept(String[] inputArray) {
         String concept = inputArray[0].replaceAll("\\[|\\]", "");
@@ -69,5 +63,12 @@ public class Senticnet4TxtImporter {
             }
         }
         return new PolarityObjectImpl(Polarity.getFromIntesity(intensity), intensity);
+    }
+
+    public static void main(String[] args) throws Exception {
+        URL documentUrl = ClassLoader.getSystemClassLoader().getResource("senticnet4/data_de.txt");
+        parse(documentUrl);
+        SQLDictionary.getInstance().setCurrDictTableCode(1);
+        SQLDictionary.getInstance().createSQLDict();
     }
 }
